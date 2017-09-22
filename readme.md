@@ -1,1 +1,1 @@
-React Simple application
+React Simple application boilerPlate

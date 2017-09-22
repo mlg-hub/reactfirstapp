@@ -1,16 +1,30 @@
+var webpack = require('webpack');
+
 module.exports = {
-    entry: './app/app.jsx',
+    entry: [
+        'script-loader!jquery/dist/jquery.min.js',
+        'script-loader!foundation-sites/dist/js/foundation.min.js',
+        './app/app.jsx'
+    ],
+    externals: {
+        jquery: 'jQuery'
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            '$': 'jquery',
+            'jQuery': 'jquery'
+        })
+    ],
     output: {
         path: __dirname,
         filename: './public/bundle.js'
     },
     resolve: {
-        modules: ['app/components/', 'node_modules'],
+        modules: ['app/components/', 'node_modules', 'app/styles/'],
         alias: {
             Main: 'Main.jsx',
-            Nav: 'Nav.jsx',
-            Container: 'Container.jsx',
-            Weather: 'weather.jsx'
+            Weather: 'weather.jsx',
+            applicationStyles: 'app.scss'
         },
         extensions: ['.js', '.jsx']
     },
